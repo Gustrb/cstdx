@@ -1,0 +1,10 @@
+#!/bin/sh
+# usage: scripts/test [package ...]   (no args = every package)
+set -e
+cd "$(dirname "$0")/.."
+if [ $# -eq 0 ]; then
+  exec make test
+fi
+for pkg in "$@"; do
+  make "test-$pkg"
+done

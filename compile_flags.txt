@@ -1,0 +1,6 @@
+-I.
+-std=c23
+-Wall
+-Werror
+-pedantic
+-Wextra
