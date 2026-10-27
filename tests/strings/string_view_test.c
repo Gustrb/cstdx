@@ -125,6 +125,23 @@ static void test_can_split_a_string_that_does_not_have_the_delimiter(void)
   TEST_ASSERT_EQUAL_UINT8(1, cstdx_string_view_equals(null, cstdx_string_view_iterable_next(&it)));
 }
 
+static void test_can_split_a_string_by_substring(void)
+{
+  const char *s = "Hello, world!";
+  cstdx_string_view_t sv = cstdx_string_view_from_cstr(s);
+  cstdx_string_view_t comma = cstdx_string_view_from_cstr(", ");
+
+  cstdx_string_view_t null = {0};
+  cstdx_string_view_t hello = cstdx_string_view_from_cstr("Hello");
+  cstdx_string_view_t world = cstdx_string_view_from_cstr("world!");
+
+  cstdx_string_view_iterable_t it = cstdx_string_view_split_string_view(sv, comma);
+
+  TEST_ASSERT_EQUAL_UINT8(1, cstdx_string_view_equals(hello, cstdx_string_view_iterable_next(&it)));
+  TEST_ASSERT_EQUAL_UINT8(1, cstdx_string_view_equals(world, cstdx_string_view_iterable_next(&it)));
+  TEST_ASSERT_EQUAL_UINT8(1, cstdx_string_view_equals(null, cstdx_string_view_iterable_next(&it)));
+}
+
 int main(void)
 {
   UNITY_BEGIN();
@@ -136,6 +153,7 @@ int main(void)
   RUN_TEST(test_is_prefix_can_find_prefixed_strings);
   RUN_TEST(test_can_split_a_string_on_its_parts);
   RUN_TEST(test_can_split_a_string_that_does_not_have_the_delimiter);
+  RUN_TEST(test_can_split_a_string_by_substring);
   return UNITY_END();
 }
 
