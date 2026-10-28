@@ -120,6 +120,24 @@ static cstdx_string_view_t cstdx_string_view_iterable_next_string_view(cstdx_str
   return (cstdx_string_view_t){.base=ptr, .len=len};
 }
 
+uint8_t cstdx_string_view_contains(cstdx_string_view_t haystack, cstdx_string_view_t needle)
+{
+  if (needle.len > haystack.len) return 0;
+
+  const char *ptr = haystack.base;
+  for (uint64_t len = 0; len <= haystack.len - needle.len; len++)
+  {
+    const char *base = ptr + len;
+    cstdx_string_view_t sub = {.base=base, .len=needle.len};
+    if (cstdx_string_view_equals(needle, sub))
+    {
+      return 1;
+    }
+  }
+
+  return 0;
+}
+
 cstdx_string_view_t cstdx_string_view_from_cstr(const char *s)
 {
   uint64_t l = strlen(s);

@@ -12,7 +12,7 @@ typedef enum
 {
   CSTDX_VIEW_ITERABLE_TAG_CHAR,
   CSTDX_VIEW_ITERABLE_TAG_SV,  
-}__cstdx_view_iterable_tag;
+} __cstdx_view_iterable_tag;
 
 typedef struct {
   cstdx_string_view_t total;
@@ -25,6 +25,8 @@ typedef struct {
 
 uint8_t cstdx_string_view_equals(cstdx_string_view_t a, cstdx_string_view_t b);
 uint8_t cstdx_string_view_is_prefix(cstdx_string_view_t a, cstdx_string_view_t prefix);
+
+uint8_t cstdx_string_view_contains(cstdx_string_view_t haystack, cstdx_string_view_t needle);
 
 cstdx_string_view_iterable_t cstdx_string_view_split(cstdx_string_view_t base, char delim);
 cstdx_string_view_iterable_t cstdx_string_view_split_string_view(cstdx_string_view_t base, cstdx_string_view_t delim);

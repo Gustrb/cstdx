@@ -142,6 +142,21 @@ static void test_can_split_a_string_by_substring(void)
   TEST_ASSERT_EQUAL_UINT8(1, cstdx_string_view_equals(null, cstdx_string_view_iterable_next(&it)));
 }
 
+static void test_can_tell_if_a_string_view_contains_the_other(void)
+{
+  const char *s = "Hello, world!";
+  cstdx_string_view_t sv = cstdx_string_view_from_cstr(s);
+  cstdx_string_view_t comma = cstdx_string_view_from_cstr(", ");
+
+  cstdx_string_view_t hello = cstdx_string_view_from_cstr("Hello");
+  cstdx_string_view_t world = cstdx_string_view_from_cstr("world!");
+
+
+  TEST_ASSERT_EQUAL_UINT8(1, cstdx_string_view_contains(sv, hello));
+  TEST_ASSERT_EQUAL_UINT8(1, cstdx_string_view_contains(sv, comma));
+  TEST_ASSERT_EQUAL_UINT8(1, cstdx_string_view_contains(sv, world));
+}
+
 int main(void)
 {
   UNITY_BEGIN();
@@ -154,6 +169,7 @@ int main(void)
   RUN_TEST(test_can_split_a_string_on_its_parts);
   RUN_TEST(test_can_split_a_string_that_does_not_have_the_delimiter);
   RUN_TEST(test_can_split_a_string_by_substring);
+  RUN_TEST(test_can_tell_if_a_string_view_contains_the_other);
   return UNITY_END();
 }
 
